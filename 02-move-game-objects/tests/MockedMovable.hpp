@@ -1,0 +1,45 @@
+#pragma once
+#include "IMovable.hpp"
+#include <stdexcept>
+
+namespace mock {
+  class MockedGetLocationError : public IMovable {
+    public:
+      Vector GetLocation() const override {
+        throw std::runtime_error("GetLocationException");
+      }
+      Vector GetVelocity() const override {
+        return { 1, 1 };
+      }
+      void SetLocation(Vector ) override {}
+  };
+
+  class MockedGetVelocityError : public IMovable {
+    public:
+      Vector GetLocation() const override {
+        return { 1, 1 };
+      }
+
+      Vector GetVelocity() const override {
+        throw std::runtime_error("GetVelocityException");
+      }
+
+      void SetLocation(Vector ) override {}
+  };
+
+  class MockedSetLocationError : public IMovable {
+    public:
+      Vector GetLocation() const override {
+        return { 1, 1 };
+      }
+
+      Vector GetVelocity() const override {
+        return { 1, 1 };
+      }
+
+      void SetLocation(Vector ) override {
+        throw std::runtime_error("SetLocationException");
+      }
+  };
+
+}
